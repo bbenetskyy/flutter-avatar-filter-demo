@@ -10,13 +10,17 @@ class AvatarRepositoryImpl implements AvatarRepository {
   AvatarRepositoryImpl(this.dataSource);
 
   @override
-  Future<List<Avatar>> getAndFilterAvatars({AvatarGender? gender, AvatarAgeGroup? ageGroup, AvatarPose? pose}) async {
+  Future<List<Avatar>> getAndFilterAvatars({
+    List<AvatarGender>? genders,
+    List<AvatarAgeGroup>? ageGroups,
+    List<AvatarPose>? poses,
+  }) async {
     final all = await dataSource.getAvatars();
     return all
         .where((a) {
-          if (gender != null && a.gender != gender) return false;
-          if (ageGroup != null && a.age.ageGroup != ageGroup) return false;
-          if (pose != null && a.pose != pose) return false;
+          if (genders != null && genders.isNotEmpty && !genders.contains(a.gender)) return false;
+          if (ageGroups != null && ageGroups.isNotEmpty && !ageGroups.contains(a.age.ageGroup)) return false;
+          if (poses != null && poses.isNotEmpty && !poses.contains(a.pose)) return false;
           return true;
         })
         .map((m) => m.toEntity())
