@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_avatar_filter_demo/style/app_colors.dart';
 import 'package:get/get.dart';
 import '../../domain/enums/avatar_gender.dart';
 import '../../domain/enums/avatar_age_group.dart';
@@ -18,7 +19,7 @@ class AvatarPage extends StatelessWidget {
     final fc = Get.find<FilterController>();
 
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: AppColors.backgroundPrimary,
       body: Column(
         children: [
           Obx(

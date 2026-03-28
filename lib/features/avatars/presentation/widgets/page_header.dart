@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_avatar_filter_demo/style/app_colors.dart';
+import 'package:flutter_avatar_filter_demo/style/style.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'dart:math' as math;
 
@@ -12,7 +14,7 @@ class PageHeader extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: Colors.white,
+      color: AppColors.backgroundPrimary,
       padding: EdgeInsets.only(top: MediaQuery.of(context).padding.top + 8, bottom: 16),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -30,10 +32,7 @@ class PageHeader extends StatelessWidget {
           const SizedBox(height: 24),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 24),
-            child: Text(
-              title,
-              style: const TextStyle(fontSize: 32, fontWeight: FontWeight.w700, color: Colors.black),
-            ),
+            child: Text(title, style: Style.text26w700PrimaryStyle.copyWith(fontSize: 32)),
           ),
           const SizedBox(height: 24),
           SingleChildScrollView(
@@ -65,20 +64,18 @@ class HeaderFilterChip extends StatelessWidget {
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
         decoration: BoxDecoration(
-          color: Colors.white,
+          color: AppColors.backgroundPrimary,
           borderRadius: BorderRadius.circular(12),
-          border: Border.all(color: const Color(0xFFF2F2F2), width: 1),
+          border: Border.all(color: AppColors.borderDefault, width: 1),
         ),
         child: Row(
           mainAxisSize: MainAxisSize.min,
           children: [
             Text(
               label,
-              style: TextStyle(
-                fontSize: 16,
-                fontWeight: isActive ? FontWeight.w600 : FontWeight.w500,
-                color: Colors.black,
-              ),
+              style: (isActive
+                  ? Style.text16w600PrimaryStyle
+                  : Style.text16w600PrimaryStyle.copyWith(fontWeight: FontWeight.w500)),
             ),
             const SizedBox(width: 8),
             Transform.rotate(
@@ -87,7 +84,7 @@ class HeaderFilterChip extends StatelessWidget {
                 'assets/svg/arrow.svg',
                 width: 6,
                 height: 10,
-                colorFilter: const ColorFilter.mode(Colors.black, BlendMode.srcIn),
+                colorFilter: const ColorFilter.mode(AppColors.textPrimary, BlendMode.srcIn),
               ),
             ),
           ],

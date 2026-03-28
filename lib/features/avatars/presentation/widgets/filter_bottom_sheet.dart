@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_avatar_filter_demo/style/app_colors.dart';
+import 'package:flutter_avatar_filter_demo/style/style.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class FilterBottomSheet<T> extends StatefulWidget {
@@ -65,9 +67,9 @@ class _FilterBottomSheetState<T> extends State<FilterBottomSheet<T>> {
       child: Padding(
         padding: EdgeInsets.only(bottom: bottomInset),
         child: Container(
-          decoration: const BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.vertical(top: Radius.circular(28)),
+          decoration: BoxDecoration(
+            color: AppColors.backgroundPrimary,
+            borderRadius: const BorderRadius.vertical(top: Radius.circular(28)),
           ),
           child: Padding(
             padding: const EdgeInsets.fromLTRB(24, 20, 24, 24),
@@ -98,12 +100,12 @@ class _FilterBottomSheetState<T> extends State<FilterBottomSheet<T>> {
                   child: ElevatedButton(
                     onPressed: _onSave,
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.black,
-                      foregroundColor: Colors.white,
+                      backgroundColor: AppColors.textPrimary,
+                      foregroundColor: AppColors.textSecondary,
                       elevation: 0,
                       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(999)),
                     ),
-                    child: const Text('Save', style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600)),
+                    child: Text('Save', style: Style.text16w600SecondaryStyle),
                   ),
                 ),
               ],
@@ -125,12 +127,7 @@ class _Header extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       children: [
-        Expanded(
-          child: Text(
-            title,
-            style: const TextStyle(fontSize: 28, fontWeight: FontWeight.w700, color: Colors.black),
-          ),
-        ),
+        Expanded(child: Text(title, style: Style.text26w700PrimaryStyle)),
         IconButton(onPressed: onClose, icon: const Icon(Icons.close), splashRadius: 20),
       ],
     );
@@ -156,7 +153,7 @@ class _FilterOptionTile extends StatelessWidget {
             Expanded(
               child: Text(
                 title,
-                style: const TextStyle(fontSize: 15, fontWeight: FontWeight.w500, color: Colors.black),
+                style: Style.text16w600PrimaryStyle.copyWith(fontSize: 15, fontWeight: FontWeight.w500),
               ),
             ),
             AppCheckbox(selected: selected),
@@ -179,9 +176,9 @@ class AppCheckbox extends StatelessWidget {
       width: 24,
       height: 24,
       decoration: BoxDecoration(
-        color: selected ? Colors.black : Colors.white,
+        color: selected ? AppColors.textPrimary : AppColors.backgroundPrimary,
         borderRadius: BorderRadius.circular(8),
-        border: Border.all(color: selected ? Colors.black : const Color(0xFFD9D9D9), width: 1.5),
+        border: Border.all(color: selected ? AppColors.textPrimary : AppColors.textAdditional, width: 1.5),
       ),
       child: selected
           ? Center(
@@ -189,7 +186,7 @@ class AppCheckbox extends StatelessWidget {
                 'assets/svg/check.svg',
                 width: 12,
                 height: 12,
-                colorFilter: const ColorFilter.mode(Colors.white, BlendMode.srcIn),
+                colorFilter: const ColorFilter.mode(AppColors.textSecondary, BlendMode.srcIn),
               ),
             )
           : null,

@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_avatar_filter_demo/style/app_colors.dart';
+import 'package:flutter_avatar_filter_demo/style/style.dart';
 import 'package:get/get.dart';
 import '../controllers/filter_controller.dart';
 import '../controllers/avatar_controller.dart';
@@ -15,10 +17,10 @@ class EmptyStateWidget extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Image.asset('assets/empty.png', width: 165, height: 165, fit: BoxFit.contain),
-            const Text(
+            Text(
               'Nothing was found using these filters',
               textAlign: TextAlign.center,
-              style: TextStyle(fontSize: 24, fontWeight: FontWeight.w700, color: Colors.black),
+              style: Style.text26w700PrimaryStyle.copyWith(fontSize: 24),
             ),
             const SizedBox(height: 32),
             SizedBox(
@@ -30,13 +32,10 @@ class EmptyStateWidget extends StatelessWidget {
                   Get.find<AvatarController>().reset();
                 },
                 style: OutlinedButton.styleFrom(
-                  side: const BorderSide(color: Color(0xFFF2F2F2)),
+                  side: const BorderSide(color: AppColors.borderDefault),
                   shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
                 ),
-                child: const Text(
-                  'Clear filters',
-                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600, color: Colors.black),
-                ),
+                child: Text('Clear filters', style: Style.text16w600PrimaryStyle.copyWith(fontSize: 18)),
               ),
             ),
           ],

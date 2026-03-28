@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_avatar_filter_demo/style/app_colors.dart';
+import 'package:flutter_avatar_filter_demo/style/style.dart';
 import '../../domain/entities/avatar.dart';
 import '../../domain/enums/avatar_gender.dart';
 import '../../domain/enums/avatar_pose.dart';
@@ -31,21 +33,19 @@ class AvatarGrid extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               Expanded(
-                child: Container(color: Colors.grey[300], child: const Icon(Icons.image, size: 50)),
+                child: Container(
+                  color: AppColors.borderDefault,
+                  child: const Icon(Icons.image, size: 50, color: AppColors.textAdditional),
+                ),
               ),
               Padding(
                 padding: const EdgeInsets.all(8),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
-                      a.name,
-                      style: const TextStyle(fontWeight: FontWeight.bold),
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
-                    ),
-                    Text(a.gender.label, style: TextStyle(fontSize: 12, color: Colors.grey[600])),
-                    Text(a.pose.label, style: TextStyle(fontSize: 12, color: Colors.grey[600])),
+                    Text(a.name, style: Style.text14w600PrimaryStyle, maxLines: 1, overflow: TextOverflow.ellipsis),
+                    Text(a.gender.label, style: Style.text12w600PrimaryStyle.copyWith(color: AppColors.textAdditional)),
+                    Text(a.pose.label, style: Style.text12w600PrimaryStyle.copyWith(color: AppColors.textAdditional)),
                   ],
                 ),
               ),
