@@ -6,7 +6,6 @@ import '../../domain/enums/avatar_gender.dart';
 import '../../domain/enums/avatar_age_group.dart';
 import '../../domain/enums/avatar_pose.dart';
 import '../controllers/avatar_controller.dart';
-import '../controllers/filter_controller.dart';
 import '../widgets/avatar_grid.dart';
 import '../widgets/filter_bottom_sheet.dart';
 import '../widgets/page_header.dart';
@@ -20,7 +19,6 @@ class AvatarPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final ac = Get.find<AvatarController>();
-    final fc = Get.find<FilterController>();
     final l10n = AppLocalizations.of(context)!;
 
     return Scaffold(
@@ -31,29 +29,26 @@ class AvatarPage extends StatelessWidget {
             () => PageHeader(
               title: l10n.allAvatars,
               onBackTap: () => Get.back(),
-              anySelected: fc.hasActive,
-              onResetTap: () {
-                fc.resetAll();
-                ac.reset();
-              },
+              anySelected: ac.hasActiveFilters,
+              onResetTap: ac.clearFilters,
               chips: [
                 HeaderFilterChip(
                   label: l10n.gender,
-                  isActive: fc.selectedGenders.isNotEmpty,
-                  count: fc.selectedGenders.length,
-                  onTap: () => _showGenderFilter(context, fc, ac, l10n),
+                  isActive: ac.selectedGenders.isNotEmpty,
+                  count: ac.selectedGenders.length,
+                  onTap: () => _showGenderFilter(context, ac, l10n),
                 ),
                 HeaderFilterChip(
                   label: l10n.age,
-                  isActive: fc.selectedAgeGroups.isNotEmpty,
-                  count: fc.selectedAgeGroups.length,
-                  onTap: () => _showAgeFilter(context, fc, ac, l10n),
+                  isActive: ac.selectedAgeGroups.isNotEmpty,
+                  count: ac.selectedAgeGroups.length,
+                  onTap: () => _showAgeFilter(context, ac, l10n),
                 ),
                 HeaderFilterChip(
                   label: l10n.pose,
-                  isActive: fc.selectedPoses.isNotEmpty,
-                  count: fc.selectedPoses.length,
-                  onTap: () => _showPoseFilter(context, fc, ac, l10n),
+                  isActive: ac.selectedPoses.isNotEmpty,
+                  count: ac.selectedPoses.length,
+                  onTap: () => _showPoseFilter(context, ac, l10n),
                 ),
               ],
             ),
@@ -79,13 +74,13 @@ class AvatarPage extends StatelessWidget {
                       children: [
                         Text(l10n.error(ac.errorMessage.value)),
                         const SizedBox(height: AppDimens.height_16),
-                        ElevatedButton(onPressed: ac.reset, child: Text(l10n.retry)),
+                        ElevatedButton(onPressed: ac.reload, child: Text(l10n.retry)),
                       ],
                     ),
                   ),
                 );
               }
-              return AvatarGrid(avatars: ac.avatars);
+              return AvatarGrid(avatars: ac.avatars.toList(), onClearFilters: ac.clearFilters);
             }),
           ),
         ],
@@ -93,37 +88,26 @@ class AvatarPage extends StatelessWidget {
     );
   }
 
-  Future<void> _showGenderFilter(
-    BuildContext context,
-    FilterController fc,
-    AvatarController ac,
-    AppLocalizations l10n,
-  ) async {
+  Future<void> _showGenderFilter(BuildContext context, AvatarController ac, AppLocalizations l10n) async {
     final genders = await FilterBottomSheet.show<AvatarGender>(
       context: context,
       title: l10n.gender,
       options: AvatarGender.values,
-      initialValues: fc.selectedGenders,
+      initialValues: ac.selectedGenders,
       labelBuilder: (item) => Text(item.getLabel(l10n), style: Style.text14w600PrimaryStyle),
     );
 
     if (genders != null) {
-      fc.setGenders(genders);
-      ac.filter(genders: fc.selectedGenders, ageGroups: fc.selectedAgeGroups, poses: fc.selectedPoses);
+      ac.updateGenderFilters(genders);
     }
   }
 
-  Future<void> _showAgeFilter(
-    BuildContext context,
-    FilterController fc,
-    AvatarController ac,
-    AppLocalizations l10n,
-  ) async {
+  Future<void> _showAgeFilter(BuildContext context, AvatarController ac, AppLocalizations l10n) async {
     final ages = await FilterBottomSheet.show<AvatarAgeGroup>(
       context: context,
       title: l10n.age,
       options: AvatarAgeGroup.values,
-      initialValues: fc.selectedAgeGroups,
+      initialValues: ac.selectedAgeGroups,
       labelBuilder: (item) => Text.rich(
         TextSpan(
           children: [
@@ -135,28 +119,21 @@ class AvatarPage extends StatelessWidget {
     );
 
     if (ages != null) {
-      fc.setAgeGroups(ages);
-      ac.filter(genders: fc.selectedGenders, ageGroups: fc.selectedAgeGroups, poses: fc.selectedPoses);
+      ac.updateAgeFilters(ages);
     }
   }
 
-  Future<void> _showPoseFilter(
-    BuildContext context,
-    FilterController fc,
-    AvatarController ac,
-    AppLocalizations l10n,
-  ) async {
+  Future<void> _showPoseFilter(BuildContext context, AvatarController ac, AppLocalizations l10n) async {
     final poses = await FilterBottomSheet.show<AvatarPose>(
       context: context,
       title: l10n.pose,
       options: AvatarPose.values,
-      initialValues: fc.selectedPoses,
+      initialValues: ac.selectedPoses,
       labelBuilder: (item) => Text(item.getLabel(l10n), style: Style.text14w600PrimaryStyle),
     );
 
     if (poses != null) {
-      fc.setPoses(poses);
-      ac.filter(genders: fc.selectedGenders, ageGroups: fc.selectedAgeGroups, poses: fc.selectedPoses);
+      ac.updatePoseFilters(poses);
     }
   }
 }

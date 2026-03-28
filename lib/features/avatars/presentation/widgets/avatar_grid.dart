@@ -9,12 +9,13 @@ import 'package:flutter_avatar_filter_demo/style/app_dimens.dart';
 
 class AvatarGrid extends StatelessWidget {
   final List<Avatar> avatars;
-  const AvatarGrid({super.key, required this.avatars});
+  final VoidCallback onClearFilters;
+  const AvatarGrid({super.key, required this.avatars, required this.onClearFilters});
 
   @override
   Widget build(BuildContext context) {
     if (avatars.isEmpty) {
-      return const EmptyStateWidget();
+      return EmptyStateWidget(onClearFilters: onClearFilters);
     }
 
     final bottomPadding = Theme.of(context).platform == TargetPlatform.iOS

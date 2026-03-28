@@ -1,15 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_avatar_filter_demo/style/app_colors.dart';
 import 'package:flutter_avatar_filter_demo/style/style.dart';
-import 'package:get/get.dart';
-import '../controllers/filter_controller.dart';
-import '../controllers/avatar_controller.dart';
-
 import 'package:flutter_avatar_filter_demo/style/app_dimens.dart';
 import 'package:flutter_avatar_filter_demo/l10n/app_localizations.dart';
 
 class EmptyStateWidget extends StatelessWidget {
-  const EmptyStateWidget({super.key});
+  final VoidCallback onClearFilters;
+  const EmptyStateWidget({super.key, required this.onClearFilters});
 
   @override
   Widget build(BuildContext context) {
@@ -30,10 +27,7 @@ class EmptyStateWidget extends StatelessWidget {
           SizedBox(
             height: AppDimens.height_62,
             child: OutlinedButton(
-              onPressed: () {
-                Get.find<FilterController>().resetAll();
-                Get.find<AvatarController>().reset();
-              },
+              onPressed: onClearFilters,
               style: OutlinedButton.styleFrom(
                 side: const BorderSide(color: AppColors.borderDefault),
                 shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(AppDimens.radius_100)),

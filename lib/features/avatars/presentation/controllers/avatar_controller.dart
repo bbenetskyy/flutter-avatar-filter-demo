@@ -3,13 +3,19 @@ import '../../domain/entities/avatar.dart';
 import '../../domain/enums/avatar_age_group.dart';
 import '../../domain/enums/avatar_gender.dart';
 import '../../domain/enums/avatar_pose.dart';
-import '../../domain/usecases/get_and_filter_avatars_usecase.dart';
+import '../../domain/usecases/get_avatars_usecase.dart';
 
 class AvatarController extends GetxController {
-  final GetAndFilterAvatarsUseCase useCase;
+  final GetAvatarsUseCase useCase;
+
+  final allAvatars = <Avatar>[];
   final avatars = <Avatar>[].obs;
   final isLoading = false.obs;
   final errorMessage = ''.obs;
+
+  final selectedGenders = <AvatarGender>[].obs;
+  final selectedAgeGroups = <AvatarAgeGroup>[].obs;
+  final selectedPoses = <AvatarPose>[].obs;
 
   AvatarController(this.useCase);
 
@@ -22,7 +28,9 @@ class AvatarController extends GetxController {
   void _load() async {
     try {
       isLoading.value = true;
-      avatars.value = await useCase();
+      final result = await useCase();
+      allAvatars.assignAll(result);
+      _applyLocalFilters();
     } catch (e) {
       errorMessage.value = e.toString();
     } finally {
@@ -30,16 +38,45 @@ class AvatarController extends GetxController {
     }
   }
 
-  void filter({List<AvatarGender>? genders, List<AvatarAgeGroup>? ageGroups, List<AvatarPose>? poses}) async {
-    try {
-      isLoading.value = true;
-      avatars.value = await useCase(genders: genders, ageGroups: ageGroups, poses: poses);
-    } catch (e) {
-      errorMessage.value = e.toString();
-    } finally {
-      isLoading.value = false;
-    }
+  void _applyLocalFilters() {
+    final filtered = allAvatars.where((avatar) {
+      if (selectedGenders.isNotEmpty && !selectedGenders.contains(avatar.gender)) {
+        return false;
+      }
+      if (selectedAgeGroups.isNotEmpty && !selectedAgeGroups.contains(avatar.age.ageGroup)) {
+        return false;
+      }
+      if (selectedPoses.isNotEmpty && !selectedPoses.contains(avatar.pose)) {
+        return false;
+      }
+      return true;
+    }).toList();
+    avatars.assignAll(filtered);
   }
 
-  void reset() => _load();
+  void updateGenderFilters(List<AvatarGender> genders) {
+    selectedGenders.assignAll(genders);
+    _applyLocalFilters();
+  }
+
+  void updateAgeFilters(List<AvatarAgeGroup> ageGroups) {
+    selectedAgeGroups.assignAll(ageGroups);
+    _applyLocalFilters();
+  }
+
+  void updatePoseFilters(List<AvatarPose> poses) {
+    selectedPoses.assignAll(poses);
+    _applyLocalFilters();
+  }
+
+  void clearFilters() {
+    selectedGenders.clear();
+    selectedAgeGroups.clear();
+    selectedPoses.clear();
+    _applyLocalFilters();
+  }
+
+  bool get hasActiveFilters => selectedGenders.isNotEmpty || selectedAgeGroups.isNotEmpty || selectedPoses.isNotEmpty;
+
+  void reload() => _load();
 }
