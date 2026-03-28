@@ -26,7 +26,7 @@ class PageHeader extends StatelessWidget {
       width: double.infinity,
       color: AppColors.backgroundPrimary,
       child: Padding(
-        padding: EdgeInsets.only(top: MediaQuery.of(context).padding.top + 9, bottom: 21),
+        padding: EdgeInsets.only(top: MediaQuery.of(context).padding.top + 9, bottom: 24),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [

@@ -82,4 +82,8 @@ class Style {
     fontWeight: FontWeight.w400,
     color: AppColors.textSecondary,
   );
+
+  static final text10NormalSecondaryAlpha80Style = text10NormalSecondaryStyle.copyWith(
+    color: AppColors.textSecondaryAlpha80,
+  );
 }

@@ -15,7 +15,7 @@ class AvatarDataSourceImpl implements AvatarDataSource {
         AvatarModel(
           id: i,
           name: 'Avatar $i',
-          imageUrl: 'assets/avatars/avatar${(i % 3) + 1}.png',
+          imageUrl: 'assets/avatars/avatar${(i % 5) + 1}.png',
           gender: i % 2 == 0 ? AvatarGender.men : AvatarGender.women,
           age: 20 + (i % 5),
           pose: AvatarPose.values[(i - 3) % AvatarPose.values.length],

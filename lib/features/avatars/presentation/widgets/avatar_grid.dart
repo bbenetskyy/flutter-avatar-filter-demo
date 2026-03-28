@@ -17,39 +17,83 @@ class AvatarGrid extends StatelessWidget {
     }
 
     return GridView.builder(
-      padding: const EdgeInsets.all(12),
+      padding: const EdgeInsets.symmetric(horizontal: 20),
       gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount: 2,
+        crossAxisCount: 3,
         childAspectRatio: 0.75,
-        crossAxisSpacing: 12,
-        mainAxisSpacing: 12,
+        crossAxisSpacing: 8,
+        mainAxisSpacing: 8,
       ),
       itemCount: avatars.length,
       itemBuilder: (_, i) {
         final a = avatars[i];
         return Card(
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              Expanded(
-                child: Container(
-                  color: AppColors.borderDefault,
-                  child: const Icon(Icons.image, size: 50, color: AppColors.textAdditional),
+          margin: EdgeInsets.zero,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(8),
+            side: BorderSide(color: AppColors.backgroundPrimary.withAlpha((255.0 * 0.05).round()), width: 1),
+          ),
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(8),
+            child: Stack(
+              children: [
+                Positioned.fill(child: Image.asset(a.imageUrl, fit: BoxFit.cover)),
+                Positioned.fill(
+                  child: DecoratedBox(
+                    decoration: BoxDecoration(
+                      gradient: LinearGradient(
+                        begin: Alignment.topCenter,
+                        end: Alignment.bottomCenter,
+                        colors: [
+                          Color.fromRGBO(0, 0, 0, 0.0),
+                          Color.fromRGBO(0, 0, 0, 0.12),
+                          Color.fromRGBO(0, 0, 0, 0.35),
+                          Color.fromRGBO(0, 0, 0, 0.68),
+                        ],
+                        stops: [0.52, 0.78, 0.9, 1.0],
+                      ),
+                    ),
+                  ),
                 ),
-              ),
-              Padding(
-                padding: const EdgeInsets.all(8),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(a.name, style: Style.text14w600PrimaryStyle, maxLines: 1, overflow: TextOverflow.ellipsis),
-                    Text(a.gender.label, style: Style.text12w600PrimaryStyle.copyWith(color: AppColors.textAdditional)),
-                    Text(a.pose.label, style: Style.text12w600PrimaryStyle.copyWith(color: AppColors.textAdditional)),
-                  ],
+                Positioned(
+                  bottom: 0,
+                  left: 0,
+                  right: 0,
+                  child: Padding(
+                    padding: const EdgeInsets.all(8),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          a.name,
+                          style: Style.text14w600SecondaryStyle,
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                        ),
+                        Row(
+                          children: [
+                            Text(a.gender.label, style: Style.text10NormalSecondaryAlpha80Style),
+                            //todo separate widget??
+                            Padding(
+                              padding: const EdgeInsets.symmetric(horizontal: 4),
+                              child: Container(
+                                width: 1,
+                                height: 1,
+                                decoration: BoxDecoration(
+                                  shape: BoxShape.circle,
+                                  color: AppColors.textSecondaryAlpha80,
+                                ),
+                              ),
+                            ),
+                            Text(a.age.toString(), style: Style.text10NormalSecondaryAlpha80Style),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         );
       },

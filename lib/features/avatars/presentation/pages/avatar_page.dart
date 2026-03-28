@@ -26,20 +26,28 @@ class AvatarPage extends StatelessWidget {
             () => PageHeader(
               title: 'All avatars',
               onBackTap: () => Get.back(),
+              anySelected: fc.hasActive,
+              onResetTap: () {
+                fc.resetAll();
+                ac.reset();
+              },
               chips: [
                 HeaderFilterChip(
-                  label: _getChipLabel(fc.selectedGenders, 'Gender'),
+                  label: 'Gender',
                   isActive: fc.selectedGenders.isNotEmpty,
+                  count: fc.selectedGenders.length,
                   onTap: () => _showGenderFilter(context, fc, ac),
                 ),
                 HeaderFilterChip(
-                  label: _getChipLabel(fc.selectedAgeGroups, 'Age', useSimpleLabel: true),
+                  label: 'Age',
                   isActive: fc.selectedAgeGroups.isNotEmpty,
+                  count: fc.selectedAgeGroups.length,
                   onTap: () => _showAgeFilter(context, fc, ac),
                 ),
                 HeaderFilterChip(
-                  label: _getChipLabel(fc.selectedPoses, 'Pose'),
+                  label: 'Pose',
                   isActive: fc.selectedPoses.isNotEmpty,
+                  count: fc.selectedPoses.length,
                   onTap: () => _showPoseFilter(context, fc, ac),
                 ),
               ],
@@ -68,16 +76,6 @@ class AvatarPage extends StatelessWidget {
         ],
       ),
     );
-  }
-
-  String _getChipLabel(List<dynamic> selections, String defaultLabel, {bool useSimpleLabel = false}) {
-    if (selections.isEmpty) return defaultLabel;
-    if (selections.length == 1) {
-      String label = selections.first.label;
-      if (useSimpleLabel) label = label.replaceAll('\n', ' ');
-      return label;
-    }
-    return '${selections.length} Selected';
   }
 
   Future<void> _showGenderFilter(BuildContext context, FilterController fc, AvatarController ac) async {
