@@ -177,19 +177,19 @@ class AppCheckbox extends StatelessWidget {
   Widget build(BuildContext context) {
     return AnimatedContainer(
       duration: const Duration(milliseconds: 150),
-      width: 24,
-      height: 24,
+      width: AppDimens.width_18,
+      height: AppDimens.height_18,
       decoration: BoxDecoration(
         color: selected ? AppColors.textPrimary : AppColors.backgroundPrimary,
-        borderRadius: BorderRadius.circular(8),
-        border: Border.all(color: selected ? AppColors.textPrimary : AppColors.textAdditional, width: 1.5),
+        borderRadius: BorderRadius.circular(AppDimens.radius_5),
+        border: Border.all(color: selected ? AppColors.textPrimary : AppColors.borderGrayMid, width: 1.5),
       ),
       child: selected
           ? Center(
               child: SvgPicture.asset(
                 'assets/svg/check.svg',
-                width: 12,
-                height: 12,
+                width: AppDimens.width_12,
+                height: AppDimens.height_12,
                 colorFilter: const ColorFilter.mode(AppColors.textSecondary, BlendMode.srcIn),
               ),
             )

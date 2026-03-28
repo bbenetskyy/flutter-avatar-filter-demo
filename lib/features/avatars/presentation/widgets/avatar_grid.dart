@@ -3,8 +3,9 @@ import 'package:flutter_avatar_filter_demo/style/app_colors.dart';
 import 'package:flutter_avatar_filter_demo/style/style.dart';
 import '../../domain/entities/avatar.dart';
 import '../../domain/enums/avatar_gender.dart';
-import '../../domain/enums/avatar_pose.dart';
 import 'empty_state_widget.dart';
+
+import 'package:flutter_avatar_filter_demo/style/app_dimens.dart';
 
 class AvatarGrid extends StatelessWidget {
   final List<Avatar> avatars;
@@ -16,13 +17,17 @@ class AvatarGrid extends StatelessWidget {
       return const EmptyStateWidget();
     }
 
+    final bottomPadding = Theme.of(context).platform == TargetPlatform.iOS
+        ? MediaQuery.of(context).padding.bottom
+        : AppDimens.padding_16;
+
     return GridView.builder(
-      padding: const EdgeInsets.symmetric(horizontal: 20),
+      padding: EdgeInsets.fromLTRB(AppDimens.padding_20, AppDimens.padding_0, AppDimens.padding_20, bottomPadding),
       gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: 3,
         childAspectRatio: 0.75,
-        crossAxisSpacing: 8,
-        mainAxisSpacing: 8,
+        crossAxisSpacing: AppDimens.spacing_8,
+        mainAxisSpacing: AppDimens.spacing_8,
       ),
       itemCount: avatars.length,
       itemBuilder: (_, i) {
@@ -30,11 +35,14 @@ class AvatarGrid extends StatelessWidget {
         return Card(
           margin: EdgeInsets.zero,
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(8),
-            side: BorderSide(color: AppColors.backgroundPrimary.withAlpha((255.0 * 0.05).round()), width: 1),
+            borderRadius: BorderRadius.circular(AppDimens.radius_8),
+            side: BorderSide(
+              color: AppColors.backgroundPrimary.withAlpha((255.0 * 0.05).round()),
+              width: AppDimens.width_1,
+            ),
           ),
           child: ClipRRect(
-            borderRadius: BorderRadius.circular(8),
+            borderRadius: BorderRadius.circular(AppDimens.radius_8),
             child: Stack(
               children: [
                 Positioned.fill(child: Image.asset(a.imageUrl, fit: BoxFit.cover)),
@@ -60,7 +68,7 @@ class AvatarGrid extends StatelessWidget {
                   left: 0,
                   right: 0,
                   child: Padding(
-                    padding: const EdgeInsets.all(8),
+                    padding: const EdgeInsets.all(AppDimens.padding_8),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -75,10 +83,10 @@ class AvatarGrid extends StatelessWidget {
                             Text(a.gender.label, style: Style.text10NormalSecondaryAlpha80Style),
                             //todo separate widget??
                             Padding(
-                              padding: const EdgeInsets.symmetric(horizontal: 4),
+                              padding: const EdgeInsets.symmetric(horizontal: AppDimens.padding_4),
                               child: Container(
-                                width: 1,
-                                height: 1,
+                                width: AppDimens.width_1,
+                                height: AppDimens.height_1,
                                 decoration: BoxDecoration(
                                   shape: BoxShape.circle,
                                   color: AppColors.textSecondaryAlpha80,

@@ -53,15 +53,20 @@ class Style {
     color: AppColors.textPrimary,
   );
 
-  static final text14w600SecondaryStyle = TextStyle(
-    fontSize: 14,
+  static final text14NormalPrimaryStyle = TextStyle(fontSize: 14, height: 1.4, color: AppColors.textPrimary);
+
+  static final text14w600SecondaryStyle = text14NormalPrimaryStyle.copyWith(
     fontWeight: FontWeight.w600,
     //todo fontFamily: 'Demibold',
     height: 1.2,
     color: AppColors.textSecondary,
   );
 
-  static final text14w600PrimaryStyle = text14w600SecondaryStyle.copyWith(color: AppColors.textPrimary, height: 1.1);
+  static final text14w600PrimaryStyle = text14NormalPrimaryStyle.copyWith(
+    fontWeight: FontWeight.w600,
+    //todo fontFamily: 'Demibold',
+    height: 1.1,
+  );
 
   static final text12w600PrimaryStyle = TextStyle(
     fontSize: 12,

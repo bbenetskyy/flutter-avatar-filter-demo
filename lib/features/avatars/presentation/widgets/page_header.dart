@@ -4,6 +4,8 @@ import 'package:flutter_avatar_filter_demo/style/style.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'dart:math' as math;
 
+import 'package:flutter_avatar_filter_demo/style/app_dimens.dart';
+
 class PageHeader extends StatelessWidget {
   final String title;
   final VoidCallback onBackTap;
@@ -26,53 +28,59 @@ class PageHeader extends StatelessWidget {
       width: double.infinity,
       color: AppColors.backgroundPrimary,
       child: Padding(
-        padding: EdgeInsets.only(top: MediaQuery.of(context).padding.top + 9, bottom: 24),
+        padding: EdgeInsets.only(
+          top: MediaQuery.of(context).padding.top + AppDimens.padding_9,
+          bottom: AppDimens.padding_24,
+        ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             IconButton(
               onPressed: onBackTap,
-              icon: SvgPicture.asset('assets/svg/arrow.svg', width: 6, height: 12),
-              padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 15),
+              icon: SvgPicture.asset('assets/svg/arrow.svg', width: AppDimens.width_6, height: AppDimens.height_12),
+              padding: const EdgeInsets.symmetric(horizontal: AppDimens.padding_25, vertical: AppDimens.padding_15),
               alignment: Alignment.centerLeft,
               constraints: const BoxConstraints(),
             ),
-            const SizedBox(height: 12),
+            const SizedBox(height: AppDimens.height_12),
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 24),
+              padding: const EdgeInsets.symmetric(horizontal: AppDimens.padding_24),
               child: Text(title, style: Style.text26w700PrimaryStyle),
             ),
-            const SizedBox(height: 12),
+            const SizedBox(height: AppDimens.height_12),
             SingleChildScrollView(
               scrollDirection: Axis.horizontal,
-              padding: const EdgeInsets.symmetric(horizontal: 24),
+              padding: const EdgeInsets.symmetric(horizontal: AppDimens.padding_24),
               child: Row(
                 children: [
                   if (anySelected) ...[
                     GestureDetector(
                       onTap: onResetTap,
                       child: Container(
-                        width: 36,
-                        height: 36,
+                        width: AppDimens.width_36,
+                        height: AppDimens.height_36,
                         decoration: BoxDecoration(
                           color: AppColors.backgroundPrimary,
-                          borderRadius: BorderRadius.circular(8),
-                          border: Border.all(color: AppColors.borderDefault, width: 1),
+                          borderRadius: BorderRadius.circular(AppDimens.radius_8),
+                          border: Border.all(color: AppColors.borderDefault, width: AppDimens.width_1),
                         ),
                         child: Center(
                           child: SvgPicture.asset(
                             'assets/svg/close.svg',
-                            width: 24,
-                            height: 24,
+                            width: AppDimens.width_24,
+                            height: AppDimens.height_24,
                             colorFilter: const ColorFilter.mode(AppColors.textPrimary, BlendMode.srcIn),
                           ),
                         ),
                       ),
                     ),
-                    const SizedBox(width: 8),
+                    const SizedBox(width: AppDimens.width_8),
                   ],
                   ...chips.map((chip) {
-                    return Padding(padding: const EdgeInsets.only(right: 12), child: chip);
+                    return Padding(
+                      padding: const EdgeInsets.only(right: AppDimens.padding_12),
+                      child: chip,
+                    );
                   }),
                 ],
               ),
@@ -98,33 +106,33 @@ class HeaderFilterChip extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       child: Container(
-        height: 36,
-        padding: const EdgeInsets.symmetric(horizontal: 12),
+        height: AppDimens.height_36,
+        padding: const EdgeInsets.symmetric(horizontal: AppDimens.padding_12),
         decoration: BoxDecoration(
           color: AppColors.backgroundPrimary,
-          borderRadius: BorderRadius.circular(8),
-          border: Border.all(color: AppColors.borderDefault, width: 1),
+          borderRadius: BorderRadius.circular(AppDimens.radius_8),
+          border: Border.all(color: AppColors.borderDefault, width: AppDimens.width_1),
         ),
         child: Row(
           mainAxisSize: MainAxisSize.min,
           children: [
             Text(label, style: Style.text12w600PrimaryStyle),
             if (count > 0) ...[
-              const SizedBox(width: 4),
+              const SizedBox(width: AppDimens.width_4),
               Container(
-                width: 16,
-                height: 18,
+                width: AppDimens.width_16,
+                height: AppDimens.height_18,
                 decoration: const BoxDecoration(color: AppColors.textPrimary, shape: BoxShape.circle),
                 child: Center(child: Text(count.toString(), style: Style.text12w700SecondaryStyle)),
               ),
             ],
-            const SizedBox(width: 12),
+            const SizedBox(width: AppDimens.width_12),
             Transform.rotate(
               angle: rotationAngle,
               child: SvgPicture.asset(
                 'assets/svg/arrow.svg',
-                width: 12,
-                height: 12,
+                width: AppDimens.width_12,
+                height: AppDimens.height_12,
                 colorFilter: const ColorFilter.mode(AppColors.textPrimary, BlendMode.srcIn),
               ),
             ),
