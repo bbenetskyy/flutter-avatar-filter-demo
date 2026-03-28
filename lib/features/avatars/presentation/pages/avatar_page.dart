@@ -8,6 +8,7 @@ import '../../domain/enums/avatar_pose.dart';
 import '../controllers/avatar_controller.dart';
 import '../widgets/avatar_grid.dart';
 import '../widgets/filter_bottom_sheet.dart';
+import '../widgets/header_filter_chip.dart';
 import '../widgets/page_header.dart';
 
 import 'package:flutter_avatar_filter_demo/style/app_dimens.dart';
