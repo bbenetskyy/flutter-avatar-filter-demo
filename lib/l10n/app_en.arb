@@ -1,0 +1,30 @@
+{
+  "@@locale": "en",
+  "save": "Save",
+  "allAvatars": "All avatars",
+  "gender": "Gender",
+  "age": "Age",
+  "pose": "Pose",
+  "error": "Error: {message}",
+  "@error": {
+    "placeholders": {
+      "message": {
+        "type": "String"
+      }
+    }
+  },
+  "retry": "Retry",
+  "nothingFound": "Nothing was found using these filters",
+  "clearFilters": "Clear filters",
+  "male": "Male",
+  "female": "Female",
+  "youngAdults": "Young adults",
+  "adults": "Adults",
+  "middleAgedAdults": "Middle-aged adults",
+  "olderAdults": "Older adults",
+  "standing": "Standing",
+  "sitting": "Sitting",
+  "selfie": "Selfie",
+  "carSelfie": "Car selfie",
+  "walking": "Walking"
+}
