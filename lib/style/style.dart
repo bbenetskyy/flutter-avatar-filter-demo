@@ -15,6 +15,13 @@ class Style {
       backgroundColor: AppColors.backgroundPrimary,
       foregroundColor: AppColors.textPrimary,
     ),
+    iconButtonTheme: IconButtonThemeData(
+      style: IconButton.styleFrom(
+        splashFactory: NoSplash.splashFactory,
+        hoverColor: Colors.transparent,
+        highlightColor: Colors.transparent,
+      ),
+    ),
   );
 
   static final text26w700PrimaryStyle = TextStyle(

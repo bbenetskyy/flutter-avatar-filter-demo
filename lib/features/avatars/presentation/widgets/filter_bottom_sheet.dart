@@ -128,7 +128,11 @@ class _Header extends StatelessWidget {
     return Row(
       children: [
         Expanded(child: Text(title, style: Style.text26w700PrimaryStyle)),
-        IconButton(onPressed: onClose, icon: const Icon(Icons.close), splashRadius: 20),
+        IconButton(
+          onPressed: onClose,
+          icon: SvgPicture.asset('assets/svg/close.svg', width: 12, height: 12),
+          padding: const EdgeInsets.all(6),
+        ),
       ],
     );
   }
