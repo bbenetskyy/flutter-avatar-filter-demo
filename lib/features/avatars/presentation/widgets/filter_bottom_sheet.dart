@@ -3,11 +3,14 @@ import 'package:flutter_avatar_filter_demo/style/app_colors.dart';
 import 'package:flutter_avatar_filter_demo/style/style.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
+import 'package:flutter_avatar_filter_demo/style/app_dimens.dart';
+import 'package:flutter_avatar_filter_demo/l10n/app_localizations.dart';
+
 class FilterBottomSheet<T> extends StatefulWidget {
   final String title;
   final List<T> options;
   final List<T> initialValues;
-  final String Function(T item) labelBuilder;
+  final Widget Function(T item) labelBuilder;
 
   const FilterBottomSheet({
     super.key,
@@ -24,7 +27,7 @@ class FilterBottomSheet<T> extends StatefulWidget {
     required BuildContext context,
     required String title,
     required List<T> options,
-    required String Function(T item) labelBuilder,
+    required Widget Function(T item) labelBuilder,
     List<T> initialValues = const [],
   }) {
     return showModalBottomSheet<List<T>>(
@@ -60,24 +63,22 @@ class _FilterBottomSheetState<T> extends State<FilterBottomSheet<T>> {
 
   @override
   Widget build(BuildContext context) {
-    final bottomInset = MediaQuery.of(context).viewInsets.bottom;
-
     return SafeArea(
       top: false,
       child: Padding(
-        padding: EdgeInsets.only(bottom: bottomInset),
+        padding: const EdgeInsets.symmetric(horizontal: AppDimens.padding_16),
         child: Container(
           decoration: BoxDecoration(
             color: AppColors.backgroundPrimary,
-            borderRadius: const BorderRadius.vertical(top: Radius.circular(28)),
+            borderRadius: const BorderRadius.all(Radius.circular(AppDimens.radius_28)),
           ),
           child: Padding(
-            padding: const EdgeInsets.fromLTRB(24, 20, 24, 24),
+            padding: const EdgeInsets.symmetric(horizontal: AppDimens.padding_20, vertical: AppDimens.padding_32),
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
                 _Header(title: widget.title, onClose: _onClose),
-                const SizedBox(height: 20),
+                const SizedBox(height: AppDimens.height_12),
                 ...widget.options.map(
                   (item) => _FilterOptionTile(
                     title: widget.labelBuilder(item),
@@ -93,19 +94,19 @@ class _FilterBottomSheetState<T> extends State<FilterBottomSheet<T>> {
                     },
                   ),
                 ),
-                const SizedBox(height: 24),
+                const SizedBox(height: AppDimens.height_24),
                 SizedBox(
                   width: double.infinity,
-                  height: 52,
+                  height: AppDimens.height_62,
                   child: ElevatedButton(
                     onPressed: _onSave,
                     style: ElevatedButton.styleFrom(
                       backgroundColor: AppColors.textPrimary,
                       foregroundColor: AppColors.textSecondary,
                       elevation: 0,
-                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(999)),
+                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(AppDimens.radius_100)),
                     ),
-                    child: Text('Save', style: Style.text16w600SecondaryStyle),
+                    child: Text(AppLocalizations.of(context)!.save, style: Style.text16w600SecondaryStyle),
                   ),
                 ),
               ],
@@ -126,12 +127,17 @@ class _Header extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Expanded(child: Text(title, style: Style.text26w700PrimaryStyle)),
-        IconButton(
-          onPressed: onClose,
-          icon: SvgPicture.asset('assets/svg/close.svg', width: 12, height: 12),
-          padding: const EdgeInsets.all(6),
+        Text(title, style: Style.text26w700PrimaryStyle),
+        GestureDetector(
+          onTap: onClose,
+          child: SvgPicture.asset(
+            'assets/svg/close.svg',
+            width: AppDimens.width_24,
+            height: AppDimens.height_24,
+            colorFilter: const ColorFilter.mode(AppColors.textPrimary, BlendMode.srcIn),
+          ),
         ),
       ],
     );
@@ -139,7 +145,7 @@ class _Header extends StatelessWidget {
 }
 
 class _FilterOptionTile extends StatelessWidget {
-  final String title;
+  final Widget title;
   final bool selected;
   final VoidCallback onTap;
 
@@ -148,18 +154,13 @@ class _FilterOptionTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      borderRadius: BorderRadius.circular(12),
+      borderRadius: BorderRadius.circular(AppDimens.radius_12),
       onTap: onTap,
       child: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 12),
+        padding: const EdgeInsets.symmetric(vertical: AppDimens.padding_12),
         child: Row(
           children: [
-            Expanded(
-              child: Text(
-                title,
-                style: Style.text16w600PrimaryStyle.copyWith(fontSize: 15, fontWeight: FontWeight.w500),
-              ),
-            ),
+            Expanded(child: title),
             AppCheckbox(selected: selected),
           ],
         ),
