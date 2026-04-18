@@ -1,64 +1,53 @@
 class AppDimens {
-  // Heights
-  static const double height_1 = 1.0;
-  static const double height_4 = 4.0;
-  static const double height_6 = 6.0;
-  static const double height_8 = 8.0;
-  static const double height_9 = 9.0;
-  static const double height_12 = 12.0;
-  static const double height_15 = 15.0;
-  static const double height_16 = 16.0;
-  static const double height_18 = 18.0;
-  static const double height_24 = 24.0;
-  static const double height_32 = 32.0;
-  static const double height_36 = 36.0;
-  static const double height_50 = 50.0;
-  static const double height_60 = 60.0;
-  static const double height_62 = 62.0;
-  static const double height_165 = 165.0;
+  // Spacing scale
+  static const double spaceXS = 4.0;
+  static const double spaceS = 8.0;
+  static const double spaceM = 12.0;
+  static const double spaceL = 16.0;
+  static const double spaceXL = 24.0;
+  static const double space2XL = 32.0;
 
-  // Widths
-  static const double width_1 = 1.0;
-  static const double width_4 = 4.0;
-  static const double width_6 = 6.0;
-  static const double width_8 = 8.0;
-  static const double width_12 = 12.0;
-  static const double width_16 = 16.0;
-  static const double width_18 = 18.0;
-  static const double width_20 = 20.0;
-  static const double width_24 = 24.0;
-  static const double width_25 = 25.0;
-  static const double width_35 = 35.0;
-  static const double width_36 = 36.0;
-  static const double width_70_5 = 70.5;
-  static const double width_165 = 165.0;
-  static const double width_180 = 180.0;
+  // Border
+  static const double borderThin = 1.0;
 
-  // Paddings & Margins
-  static const double padding_0 = 0.0;
-  static const double padding_4 = 4.0;
-  static const double padding_8 = 8.0;
-  static const double padding_9 = 9.0;
-  static const double padding_12 = 12.0;
-  static const double padding_15 = 15.0;
-  static const double padding_16 = 16.0;
-  static const double padding_20 = 20.0;
-  static const double padding_24 = 24.0;
-  static const double padding_25 = 25.0;
-  static const double padding_32 = 32.0;
-  static const double padding_35 = 35.0;
-  static const double padding_70_5 = 70.5;
+  // Radii
+  static const double radiusXS = 5.0;
+  static const double radiusS = 8.0;
+  static const double radiusM = 12.0;
+  static const double radiusL = 28.0;
+  static const double radiusFull = 100.0;
 
-  // Border Radii
-  static const double radius_5 = 5.0;
-  static const double radius_8 = 8.0;
-  static const double radius_12 = 12.0;
-  static const double radius_28 = 28.0;
-  static const double radius_100 = 100.0;
+  // Component sizes
+  static const double chipSize = 36.0;
+  static const double buttonHeight = 62.0;
+  static const double checkboxSize = 18.0;
+  static const double checkboxIconSize = 12.0;
+  static const double iconSize = 24.0;
+  static const double filterBadgeW = 16.0;
+  static const double filterBadgeH = 18.0;
 
-  // Others
-  static const double spacing_8 = 8.0;
-  static const double spacing_12 = 12.0;
-  static const double spacing_16 = 16.0;
-  static const double spacing_24 = 24.0;
+  // Grid
+  static const double gridPadH = 20.0;
+  static const double gridGap = 8.0;
+
+  // Header
+  static const double headerPadH = 24.0;
+  static const double headerTopPad = 9.0;
+  static const double headerIconPadH = 25.0;
+  static const double headerIconPadV = 15.0;
+  static const double backArrowW = 6.0;
+  static const double backArrowH = 12.0;
+  static const double chipArrowSize = 12.0;
+
+  // Empty state
+  static const double emptyStateImageSize = 165.0;
+  static const double emptyStatePadH = 70.5;
+  static const double clearBtnPadH = 35.0;
+
+  // Filter sheet
+  static const double sheetPadH = 20.0;
+  static const double sheetPadV = 32.0;
+
+  // Checkbox
+  static const double checkboxBorderWidth = 1.5;
 }

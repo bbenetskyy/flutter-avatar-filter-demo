@@ -33,7 +33,7 @@ class Style {
   );
 
   static final text22w700PrimaryStyle = TextStyle(
-    fontSize: 26,
+    fontSize: 22,
     fontWeight: FontWeight.w700,
     //todo fontFamily: 'Bold',
     height: 1.2,

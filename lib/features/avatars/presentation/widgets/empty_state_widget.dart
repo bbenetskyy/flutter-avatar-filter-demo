@@ -11,35 +11,37 @@ class EmptyStateWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: AppDimens.padding_70_5),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Image.asset(
-            'assets/empty.png',
-            width: AppDimens.width_165,
-            height: AppDimens.height_165,
-            fit: BoxFit.contain,
-          ),
-          Text(l10n.nothingFound, textAlign: TextAlign.center, style: Style.text22w700PrimaryStyle),
-          const SizedBox(height: AppDimens.height_24),
-          SizedBox(
-            height: AppDimens.height_62,
-            child: OutlinedButton(
-              onPressed: onClearFilters,
-              style: OutlinedButton.styleFrom(
-                side: const BorderSide(color: AppColors.borderDefault),
-                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(AppDimens.radius_100)),
-              ),
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: AppDimens.padding_35),
-                child: Text(l10n.clearFilters, style: Style.text16w600PrimaryStyle),
+    return SafeArea(
+      top: false,
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: AppDimens.emptyStatePadH),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Image.asset(
+              'assets/empty.png',
+              width: AppDimens.emptyStateImageSize,
+              height: AppDimens.emptyStateImageSize,
+              fit: BoxFit.contain,
+            ),
+            Text(l10n.nothingFound, textAlign: TextAlign.center, style: Style.text22w700PrimaryStyle),
+            const SizedBox(height: AppDimens.spaceXL),
+            SizedBox(
+              height: AppDimens.buttonHeight,
+              child: OutlinedButton(
+                onPressed: onClearFilters,
+                style: OutlinedButton.styleFrom(
+                  side: const BorderSide(color: AppColors.borderDefault),
+                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(AppDimens.radiusFull)),
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: AppDimens.clearBtnPadH),
+                  child: Text(l10n.clearFilters, style: Style.text16w600PrimaryStyle),
+                ),
               ),
             ),
-          ),
-          const SizedBox(width: AppDimens.width_180, height: AppDimens.height_60),
-        ],
+          ],
+        ),
       ),
     );
   }

@@ -10,42 +10,49 @@ class HeaderFilterChip extends StatelessWidget {
   final VoidCallback onTap;
   final bool isActive;
   final int count;
-  final double rotationAngle = -90 * math.pi / 180;
 
-  const HeaderFilterChip({super.key, required this.label, required this.onTap, this.isActive = false, this.count = 0});
+  static const double _kArrowRotation = -math.pi / 2;
+
+  const HeaderFilterChip({
+    super.key,
+    required this.label,
+    required this.onTap,
+    this.isActive = false,
+    this.count = 0,
+  });
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: onTap,
       child: Container(
-        height: AppDimens.height_36,
-        padding: const EdgeInsets.symmetric(horizontal: AppDimens.padding_12),
+        height: AppDimens.chipSize,
+        padding: const EdgeInsets.symmetric(horizontal: AppDimens.spaceM),
         decoration: BoxDecoration(
           color: AppColors.backgroundPrimary,
-          borderRadius: BorderRadius.circular(AppDimens.radius_8),
-          border: Border.all(color: AppColors.borderDefault, width: AppDimens.width_1),
+          borderRadius: BorderRadius.circular(AppDimens.radiusS),
+          border: Border.all(color: AppColors.borderDefault, width: AppDimens.borderThin),
         ),
         child: Row(
           mainAxisSize: MainAxisSize.min,
           children: [
             Text(label, style: Style.text12w600PrimaryStyle),
             if (count > 0) ...[
-              const SizedBox(width: AppDimens.width_4),
+              const SizedBox(width: AppDimens.spaceXS),
               Container(
-                width: AppDimens.width_16,
-                height: AppDimens.height_18,
+                width: AppDimens.filterBadgeW,
+                height: AppDimens.filterBadgeH,
                 decoration: const BoxDecoration(color: AppColors.textPrimary, shape: BoxShape.circle),
                 child: Center(child: Text(count.toString(), style: Style.text12w700SecondaryStyle)),
               ),
             ],
-            const SizedBox(width: AppDimens.width_12),
+            const SizedBox(width: AppDimens.spaceM),
             Transform.rotate(
-              angle: rotationAngle,
+              angle: _kArrowRotation,
               child: SvgPicture.asset(
                 'assets/svg/arrow.svg',
-                width: AppDimens.width_12,
-                height: AppDimens.height_12,
+                width: AppDimens.chipArrowSize,
+                height: AppDimens.chipArrowSize,
                 colorFilter: const ColorFilter.mode(AppColors.textPrimary, BlendMode.srcIn),
               ),
             ),

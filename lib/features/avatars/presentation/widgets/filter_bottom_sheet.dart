@@ -67,19 +67,19 @@ class _FilterBottomSheetState<T> extends State<FilterBottomSheet<T>> {
     return SafeArea(
       top: false,
       child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: AppDimens.padding_16),
+        padding: const EdgeInsets.symmetric(horizontal: AppDimens.spaceL),
         child: Container(
-          decoration: BoxDecoration(
+          decoration: const BoxDecoration(
             color: AppColors.backgroundPrimary,
-            borderRadius: const BorderRadius.all(Radius.circular(AppDimens.radius_28)),
+            borderRadius: BorderRadius.all(Radius.circular(AppDimens.radiusL)),
           ),
           child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: AppDimens.padding_20, vertical: AppDimens.padding_32),
+            padding: const EdgeInsets.symmetric(horizontal: AppDimens.sheetPadH, vertical: AppDimens.sheetPadV),
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
                 _Header(title: widget.title, onClose: _onClose),
-                const SizedBox(height: AppDimens.height_12),
+                const SizedBox(height: AppDimens.spaceM),
                 ...widget.options.map(
                   (item) => _FilterOptionTile(
                     title: widget.labelBuilder(item),
@@ -95,17 +95,17 @@ class _FilterBottomSheetState<T> extends State<FilterBottomSheet<T>> {
                     },
                   ),
                 ),
-                const SizedBox(height: AppDimens.height_24),
+                const SizedBox(height: AppDimens.spaceXL),
                 SizedBox(
                   width: double.infinity,
-                  height: AppDimens.height_62,
+                  height: AppDimens.buttonHeight,
                   child: ElevatedButton(
                     onPressed: _onSave,
                     style: ElevatedButton.styleFrom(
                       backgroundColor: AppColors.textPrimary,
                       foregroundColor: AppColors.textSecondary,
                       elevation: 0,
-                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(AppDimens.radius_100)),
+                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(AppDimens.radiusFull)),
                     ),
                     child: Text(AppLocalizations.of(context)!.save, style: Style.text16w600SecondaryStyle),
                   ),
@@ -135,8 +135,8 @@ class _Header extends StatelessWidget {
           onTap: onClose,
           child: SvgPicture.asset(
             'assets/svg/close.svg',
-            width: AppDimens.width_24,
-            height: AppDimens.height_24,
+            width: AppDimens.iconSize,
+            height: AppDimens.iconSize,
             colorFilter: const ColorFilter.mode(AppColors.textPrimary, BlendMode.srcIn),
           ),
         ),
@@ -155,10 +155,10 @@ class _FilterOptionTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      borderRadius: BorderRadius.circular(AppDimens.radius_12),
+      borderRadius: BorderRadius.circular(AppDimens.radiusM),
       onTap: onTap,
       child: Padding(
-        padding: const EdgeInsets.symmetric(vertical: AppDimens.padding_12),
+        padding: const EdgeInsets.symmetric(vertical: AppDimens.spaceM),
         child: Row(
           children: [
             Expanded(child: title),

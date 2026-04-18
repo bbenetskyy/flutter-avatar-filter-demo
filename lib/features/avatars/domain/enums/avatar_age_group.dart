@@ -1,50 +1,12 @@
-import 'package:flutter_avatar_filter_demo/l10n/app_localizations.dart';
-
 enum AvatarAgeGroup { youngAdults, adults, middleAgedAdults, olderAdults }
 
 extension AvatarAgeGroupX on AvatarAgeGroup {
-  String getNameLabel(AppLocalizations l10n) {
-    switch (this) {
-      case AvatarAgeGroup.youngAdults:
-        return l10n.youngAdults;
-      case AvatarAgeGroup.adults:
-        return l10n.adults;
-      case AvatarAgeGroup.middleAgedAdults:
-        return l10n.middleAgedAdults;
-      case AvatarAgeGroup.olderAdults:
-        return l10n.olderAdults;
-    }
-  }
-
-  String get nameLabel {
-    switch (this) {
-      case AvatarAgeGroup.youngAdults:
-        return 'Young adults';
-      case AvatarAgeGroup.adults:
-        return 'Adults';
-      case AvatarAgeGroup.middleAgedAdults:
-        return 'Middle-aged adults';
-      case AvatarAgeGroup.olderAdults:
-        return 'Older adults';
-    }
-  }
-
-  String get rangeLabel {
-    switch (this) {
-      case AvatarAgeGroup.youngAdults:
-        return '18-24';
-      case AvatarAgeGroup.adults:
-        return '25-39';
-      case AvatarAgeGroup.middleAgedAdults:
-        return '40-64';
-      case AvatarAgeGroup.olderAdults:
-        return '65+';
-    }
-  }
-
-  String get label {
-    return '$nameLabel\n$rangeLabel';
-  }
+  String get rangeLabel => switch (this) {
+    AvatarAgeGroup.youngAdults => '18–24',
+    AvatarAgeGroup.adults => '25–39',
+    AvatarAgeGroup.middleAgedAdults => '40–64',
+    AvatarAgeGroup.olderAdults => '65+',
+  };
 }
 
 extension IntToAvatarAgeGroup on int {
